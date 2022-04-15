@@ -100,15 +100,26 @@ describe FoodsController do
   end
 
   describe 'PATCH #update' do
-    context "with valid attributes" do
-      it "locates the requested @food"
-      it "changes @food's attributes"
-      it "redirects to the food"
+    before :each do
+      @food = create(:food)
     end
 
-    context "with invalid attributes" do
-      it "does not update the food in the database"
-      it "re-renders the :edit template"
+    context "with valid attributes" do
+      it "locates the requested @food" do
+        patch :update, params: { id: @food, food: attributes_for(:food) }
+        expect(assigns(:food)).to eq @food
+      end
+
+      it "changes @food's attributes" do
+        patch :update, params: { id: @food, food: attributes_for(:food, name: 'Nasi Uduk') }
+        @food.reload
+        expect(@food.name).to eq('Nasi Uduk')
+      end
+
+      it "redirects to the food" do
+        patch :update, params: { id: @food, food: attributes_for(:food) }
+        expect(response).to redirect_to @food
+      end
     end
   end
 
