@@ -72,3 +72,8 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+group :development, :test do
+  # -cut-
+  gem 'rails-controller-testing'
+end
