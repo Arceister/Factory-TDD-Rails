@@ -137,7 +137,19 @@ describe FoodsController do
   end
 
   describe 'DELETE #destroy' do
-    it "deletes the food from the database"
-    it "redirects to foods#index"
+    before :each do
+      @food = create(:food)
+    end
+
+    it "deletes the food from the database" do
+      expect{
+        delete :destroy, params: { id: @food }
+      }.to change(Food, :count).by(-1)
+    end
+
+    it "redirects to foods#index" do
+      delete :destroy, params: { id: @food }
+      expect(response).to redirect_to foods_url
+    end
   end
 end
