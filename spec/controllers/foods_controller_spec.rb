@@ -17,4 +17,9 @@ describe FoodsController do
     it "assigns the requested food to @food"
     it "renders the :show template"
   end
+
+  describe 'GET #new' do
+    it "assigns a new Food to @food"
+    it "renders the :new template"
+  end
 end
